@@ -18,7 +18,9 @@
     }
 
     body {
-      background: linear-gradient(180deg, #FFF3D6 0%, #FFE4A0 40%, #FFD575 100%);
+      background:
+        url('img/bg-window.png') top center / 100% auto no-repeat,
+        linear-gradient(180deg, #FFE2AC 0%, #ffffff 100%);
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -270,11 +272,11 @@
     // 配置区：修改这两个变量即可
     // =============================================
 
-    // 华为应用市场链接（替换为你的真实链接）
+    // 华为应用市场链接
     var APP_GALLERY_URL = 'appmarket://details?id=com.liubowang.metronome.hm';
 
     // 复制到剪切板的口令（替换为你的真实口令）
-    var KOULING_TEXT = 'MetronomeShareFriend';
+    var KOULING_TEXT = '【YOUR_KOULING_TEXT】';
 
     // =============================================
 
@@ -323,7 +325,13 @@
         })
         .finally(function () {
           setTimeout(function () {
-            window.location.href = APP_GALLERY_URL;
+            window.location.href = `
+intent://details?id=com.liubowang.metronome.hm
+#Intent;
+scheme=appmarket;
+package=com.huawei.appmarket;
+end
+`;
           }, 800);
         });
     });
