@@ -18,26 +18,26 @@
     }
 
     body {
-      background:
-        url('img/bg-window.png') top center / 100% auto no-repeat,
-        linear-gradient(180deg, #FFE2AC 0%, #ffffff 100%);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      margin: 0;
+      padding: 0;
       font-family: -apple-system, "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      background: none; /* 背景放到 container */
     }
-
+    
     .container {
       width: 100%;
       max-width: 390px;
-      min-height: 100vh;
+      min-height: 100vh; /* 撑满屏幕 */
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 60px 24px 40px;
+      padding: 60px 24px 40px 60px;
+      background:
+        url('img/bg-window.png') top center / 100% auto no-repeat,
+        linear-gradient(180deg, #FFE2AC 0%, #ffffff 100%);
     }
-
     /* App Logo */
     .logo-wrap {
       width: 88px;
@@ -58,7 +58,7 @@
 
     /* 标题区 */
     .title {
-      font-size: 26px;
+      font-size: 22px;
       font-weight: 800;
       color: #1A1A1A;
       letter-spacing: 0.5px;
@@ -73,7 +73,7 @@
     }
 
     .subtitle {
-      font-size: 14px;
+      font-size: 12px;
       color: #7A6230;
       text-align: center;
       line-height: 1.7;
@@ -100,7 +100,7 @@
     .btn-download {
       width: 100%;
       max-width: 320px;
-      height: 56px;
+      height: 50px;
       border: none;
       border-radius: 28px;
       cursor: pointer;
@@ -109,7 +109,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
       background: #111;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
       outline: none;
@@ -154,21 +154,21 @@
 
     .stat-item {
       display: flex;
-      flex-direction: column;
       align-items: center;
       gap: 4px;
+	  flex-shrink: 0; /* 防止被压缩 */
     }
 
     .stat-value {
-      font-size: 22px;
+      font-size: 14px;
       font-weight: 800;
-      color: #7A5200;
+      color: #E19E36;
       line-height: 1.2;
     }
 
     .stat-label {
       font-size: 12px;
-      color: #9A7030;
+      color: #E19E36;
       text-align: center;
       line-height: 1.4;
     }
@@ -176,11 +176,12 @@
     .stat-with-laurel {
       display: flex;
       align-items: center;
+	   flex-direction: column;
       gap: 6px;
     }
 
     .stat-with-laurel .laurel {
-      width: 22px;
+      width: 16px;
       height: auto;
       flex-shrink: 0;
     }
@@ -240,25 +241,28 @@
     <!-- 底部统计 -->
     <div class="stats">
       <div class="stat-item">
+		  <img class="laurel" src="img/laurel-right.png" alt="" />
         <div class="stat-with-laurel">
-          <img class="laurel" src="img/laurel-right.png" alt="" />
+          
           <div>
-            <div class="stat-value">1.4亿次</div>
+       <div class="stat-label">累计安装下载量超</div>
           </div>
-          <img class="laurel" src="img/laurel-left.png" alt="" />
+         <div class="stat-value">1.4亿次</div>
         </div>
-        <div class="stat-label">累计安装下载量超</div>
+         <img class="laurel" src="img/laurel-left.png" alt="" />
+		  
       </div>
 
       <div class="stat-item">
+		  <img class="laurel" src="img/laurel-right.png" alt="" />
         <div class="stat-with-laurel">
-          <img class="laurel" src="img/laurel-right.png" alt="" />
           <div>
-            <div class="stat-value">6年</div>
+         <div class="stat-label">已持续为用户服务</div>
           </div>
-          <img class="laurel" src="img/laurel-left.png" alt="" />
+         		  <div class="stat-value">6年</div>
         </div>
-        <div class="stat-label">已持续为用户服务</div>
+
+		   <img class="laurel" src="img/laurel-left.png" alt="" />
       </div>
     </div>
 
@@ -276,7 +280,7 @@
     var APP_GALLERY_URL = 'store://appgallery.huawei.com/app/detail?id=com.liubowang.metronome.hm';
 
     // 复制到剪切板的口令（替换为你的真实口令）
-    var KOULING_TEXT = '【YOUR_KOULING_TEXT】';
+    var KOULING_TEXT = 'metronemoShareFriend';
 
     // =============================================
 
