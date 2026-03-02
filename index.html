@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>好友送您高级VIP</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      background: linear-gradient(180deg, #FFF3D6 0%, #FFE4A0 40%, #FFD575 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: -apple-system, "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 390px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 24px 40px;
+    }
+
+    /* App Logo */
+    .logo-wrap {
+      width: 88px;
+      height: 88px;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      margin-bottom: 28px;
+      flex-shrink: 0;
+    }
+
+    .logo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* 标题区 */
+    .title {
+      font-size: 26px;
+      font-weight: 800;
+      color: #1A1A1A;
+      letter-spacing: 0.5px;
+      text-align: center;
+      margin-bottom: 14px;
+      line-height: 1.3;
+    }
+
+    .title em {
+      font-style: normal;
+      color: #B5820A;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #7A6230;
+      text-align: center;
+      line-height: 1.7;
+      padding: 0 8px;
+      margin-bottom: 36px;
+    }
+
+    /* VIP 卡图 */
+    .vip-card-wrap {
+      width: 78%;
+      max-width: 280px;
+      margin-bottom: 44px;
+      flex-shrink: 0;
+    }
+
+    .vip-card-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 12px 28px rgba(180, 120, 0, 0.30));
+    }
+
+    /* 下载按钮 */
+    .btn-download {
+      width: 100%;
+      max-width: 320px;
+      height: 56px;
+      border: none;
+      border-radius: 28px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 40px;
+      background: #111;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+      outline: none;
+      -webkit-appearance: none;
+      flex-shrink: 0;
+    }
+
+    .btn-download .btn-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 28px;
+      pointer-events: none;
+    }
+
+    .btn-download .btn-text {
+      position: relative;
+      z-index: 1;
+      font-size: 18px;
+      font-weight: 700;
+      color: #FFE0A0;
+      letter-spacing: 1px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    }
+
+    /* 按钮点击态 */
+    .btn-download:active {
+      transform: scale(0.97);
+      transition: transform 0.1s ease;
+    }
+
+    /* 底部统计 */
+    .stats {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      flex-shrink: 0;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .stat-value {
+      font-size: 22px;
+      font-weight: 800;
+      color: #7A5200;
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: #9A7030;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .stat-with-laurel {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .stat-with-laurel .laurel {
+      width: 22px;
+      height: auto;
+      flex-shrink: 0;
+    }
+
+    /* 复制成功提示 */
+    .toast {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      font-size: 14px;
+      padding: 10px 22px;
+      border-radius: 24px;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- App Logo -->
+    <div class="logo-wrap">
+      <img src="img/logo.png" alt="节拍器 Logo" />
+    </div>
+
+    <!-- 标题 -->
+    <h1 class="title">好友送您1天<em>「高级VIP」</em></h1>
+
+    <!-- 副标题 -->
+    <p class="subtitle">
+      解锁全套高保真音色，细分节拍，告别广告打扰<br />
+      就在这款千万用户都在用的神仙节拍器
+    </p>
+
+    <!-- VIP 卡图 -->
+    <div class="vip-card-wrap">
+      <img src="img/vip-card.png" alt="VIP卡" />
+    </div>
+
+    <!-- 下载按钮 -->
+    <button class="btn-download" id="btnDownload">
+      <img class="btn-bg" src="img/btn-bg.png" alt="" />
+      <span class="btn-text">立即下载领取VIP</span>
+    </button>
+
+    <!-- 底部统计 -->
+    <div class="stats">
+      <div class="stat-item">
+        <div class="stat-with-laurel">
+          <img class="laurel" src="img/laurel-left.png" alt="" />
+          <div>
+            <div class="stat-value">1.4亿次</div>
+          </div>
+          <img class="laurel" src="img/laurel-right.png" alt="" />
+        </div>
+        <div class="stat-label">累计安装下载量超</div>
+      </div>
+
+      <div class="stat-item">
+        <div class="stat-with-laurel">
+          <img class="laurel" src="img/laurel-left.png" alt="" />
+          <div>
+            <div class="stat-value">6年</div>
+          </div>
+          <img class="laurel" src="img/laurel-right.png" alt="" />
+        </div>
+        <div class="stat-label">已持续为用户服务</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 复制成功提示 -->
+  <div class="toast" id="toast">已复制口令，请前往应用商店领取</div>
+
+  <script>
+    // =============================================
+    // 配置区：修改这两个变量即可
+    // =============================================
+
+    // 华为应用市场链接（替换为你的真实链接）
+    var APP_GALLERY_URL = 'https://appgallery.huawei.com/app/YOUR_APP_ID';
+
+    // 复制到剪切板的口令（替换为你的真实口令）
+    var KOULING_TEXT = '【YOUR_KOULING_TEXT】';
+
+    // =============================================
+
+    function showToast(msg) {
+      var toast = document.getElementById('toast');
+      if (msg) toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(function () {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    function copyToClipboard(text) {
+      // 优先使用现代 Clipboard API
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        return navigator.clipboard.writeText(text);
+      }
+      // 降级方案：创建临时 textarea
+      return new Promise(function (resolve, reject) {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0;';
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        try {
+          var success = document.execCommand('copy');
+          document.body.removeChild(textarea);
+          if (success) resolve();
+          else reject(new Error('execCommand failed'));
+        } catch (e) {
+          document.body.removeChild(textarea);
+          reject(e);
+        }
+      });
+    }
+
+    document.getElementById('btnDownload').addEventListener('click', function () {
+      // 先复制口令，再跳转
+      copyToClipboard(KOULING_TEXT)
+        .then(function () {
+          showToast('口令已复制，即将前往应用商店～');
+        })
+        .catch(function () {
+          showToast('即将前往应用商店～');
+        })
+        .finally(function () {
+          setTimeout(function () {
+            window.location.href = APP_GALLERY_URL;
+          }, 800);
+        });
+    });
+  </script>
+</body>
+</html>
