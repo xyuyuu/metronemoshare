@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>好友送您高级VIP</title>
+  <title>好友送您一天VIP</title>
   <style>
     * {
       margin: 0;
@@ -23,29 +23,48 @@
       font-family: -apple-system, "PingFang SC", "Helvetica Neue", Arial, sans-serif;
       display: flex;
       justify-content: center;
-      background: none; /* 背景放到 container */
+      background: none;
     }
-    
+
     .container {
       width: 100%;
       max-width: 390px;
-      min-height: 100vh; /* 撑满屏幕 */
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 40px 24px 60px 24px;
-      background:
-        url('img/bg-window.png') top center / 100% auto no-repeat,
-        linear-gradient(180deg, #FFE2AC 0%, #ffffff 100%);
+      padding: 20px 24px 60px 24px;
+      background: url('img/mask-group.png') top center / 100% auto no-repeat,
+                  linear-gradient(180deg, #D4F1F4 0%, #E8F8F5 25%, #ffffff 100%);
     }
+
+    /* VIP 卡图（顶部） */
+    .vip-card-wrap {
+      width: 70%;
+      max-width: 260px;
+      margin-bottom: 20px;
+      flex-shrink: 0;
+    }
+
+    .vip-card-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* 中间留白，露出背景插图 */
+    .spacer {
+      flex: 0 0 230px;
+    }
+
     /* App Logo */
     .logo-wrap {
-      width: 88px;
-      height: 88px;
-      border-radius: 22px;
+      width: 72px;
+      height: 72px;
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-      margin-bottom: 28px;
+      box-shadow: 0 6px 20px rgba(0, 150, 136, 0.15);
+      margin-bottom: 16px;
       flex-shrink: 0;
     }
 
@@ -56,134 +75,42 @@
       display: block;
     }
 
-    /* 标题区 */
-    .title {
-      font-size: 22px;
-      font-weight: 800;
-      color: #1A1A1A;
-      letter-spacing: 0.5px;
-      text-align: center;
-      margin-bottom: 14px;
-      line-height: 1.3;
-    }
-
-    .title em {
-      font-style: normal;
-      color: #B5820A;
-    }
-
+    /* 副标题 */
     .subtitle {
-      font-size: 12px;
-      color: #7A6230;
+      font-size: 13px;
+      color: #546E7A;
       text-align: center;
-      line-height: 1.7;
-      padding: 0 8px;
-      margin-bottom: 36px;
-    }
-
-    /* VIP 卡图 */
-    .vip-card-wrap {
-      width: 78%;
-      max-width: 280px;
-      margin-bottom: 44px;
-      flex-shrink: 0;
-    }
-
-    .vip-card-wrap img {
-      width: 100%;
-      height: auto;
-      display: block;
-      filter: drop-shadow(0 12px 28px rgba(180, 120, 0, 0.30));
+      line-height: 1.8;
+      padding: 0 12px;
+      margin-bottom: 24px;
     }
 
     /* 下载按钮 */
     .btn-download {
-      width: 100%;
-      max-width: 320px;
-      height: 50px;
+      width: 80%;
+      max-width: 300px;
       border: none;
       border-radius: 28px;
       cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 30px;
-      background: #111;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+      padding: 0;
+      background: none;
       outline: none;
       -webkit-appearance: none;
       flex-shrink: 0;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.20);
     }
 
-    .btn-download .btn-bg {
-      position: absolute;
-      inset: 0;
+    .btn-download img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
+      display: block;
       border-radius: 28px;
-      pointer-events: none;
-    }
-
-    .btn-download .btn-text {
-      position: relative;
-      z-index: 1;
-      font-size: 18px;
-      font-weight: 700;
-      color: #FFE0A0;
-      letter-spacing: 1px;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.4);
     }
 
     /* 按钮点击态 */
     .btn-download:active {
       transform: scale(0.97);
       transition: transform 0.1s ease;
-    }
-
-    /* 底部统计 */
-    .stats {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 32px;
-      flex-shrink: 0;
-    }
-
-    .stat-item {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-	  flex-shrink: 0; /* 防止被压缩 */
-    }
-
-    .stat-value {
-      font-size: 14px;
-      font-weight: 800;
-      color: #E19E36;
-      line-height: 1.2;
-    }
-
-    .stat-label {
-      font-size: 12px;
-      color: #E19E36;
-      text-align: center;
-      line-height: 1.4;
-    }
-
-    .stat-with-laurel {
-      display: flex;
-      align-items: center;
-	   flex-direction: column;
-      gap: 6px;
-    }
-
-    .stat-with-laurel .laurel {
-      width: 16px;
-      height: auto;
-      flex-shrink: 0;
     }
 
     /* 复制成功提示 */
@@ -213,58 +140,29 @@
 <body>
   <div class="container">
 
-    <!-- App Logo -->
+    <!-- App Logo（顶部） -->
     <div class="logo-wrap">
-      <img src="img/logo.png" alt="节拍器 Logo" />
+      <img src="img/ic_launcher_round.png" alt="放大镜 Logo" />
     </div>
-
-    <!-- 标题 -->
-    <h1 class="title">好友送您1天<em>「高级VIP」</em></h1>
 
     <!-- 副标题 -->
     <p class="subtitle">
-      解锁全套高保真音色，细分节拍，告别广告打扰<br />
-      就在这款千万用户都在用的神仙节拍器
+      解锁重点文字识别，1-20倍的放大效果，告别广告打扰<br />
+      就在这款千万用户都在用的神仙放大镜
     </p>
 
-    <!-- VIP 卡图 -->
+    <!-- 中间留白，露出背景插图 -->
+    <div class="spacer"></div>
+
+    <!-- 好友送您一天VIP 卡图 -->
     <div class="vip-card-wrap">
-      <img src="img/vip-card.png" alt="VIP卡" />
+      <img src="img/vip-card-magnifier.png" alt="好友送您一天VIP" />
     </div>
 
     <!-- 下载按钮 -->
     <button class="btn-download" id="btnDownload">
-      <img class="btn-bg" src="img/btn-bg.png" alt="" />
-      <span class="btn-text">立即下载领取VIP</span>
+      <img src="img/bg-decoration.png" alt="立即下载领取VIP" />
     </button>
-
-    <!-- 底部统计 -->
-    <div class="stats">
-      <div class="stat-item">
-		  <img class="laurel" src="img/laurel-right.png" alt="" />
-        <div class="stat-with-laurel">
-          
-          <div>
-       <div class="stat-label">累计安装下载量超</div>
-          </div>
-         <div class="stat-value">1.4亿次</div>
-        </div>
-         <img class="laurel" src="img/laurel-left.png" alt="" />
-		  
-      </div>
-
-      <div class="stat-item">
-		  <img class="laurel" src="img/laurel-right.png" alt="" />
-        <div class="stat-with-laurel">
-          <div>
-         <div class="stat-label">已持续为用户服务</div>
-          </div>
-         		  <div class="stat-value">6年</div>
-        </div>
-
-		   <img class="laurel" src="img/laurel-left.png" alt="" />
-      </div>
-    </div>
 
   </div>
 
@@ -277,10 +175,10 @@
     // =============================================
 
     // 华为应用市场链接
-    var APP_GALLERY_URL = 'store://appgallery.huawei.com/app/detail?id=com.liubowang.metronome.hm';
+    var APP_GALLERY_URL = 'store://appgallery.huawei.com/app/detail?id=com.liubowang.magnifier.hm';
 
     // 复制到剪切板的口令（替换为你的真实口令）
-    var KOULING_TEXT = 'metronemo_Share_1dayVIP';
+    var KOULING_TEXT = 'Magnifier_Share_1dayVIP';
 
     // =============================================
 
@@ -294,11 +192,9 @@
     }
 
     function copyToClipboard(text) {
-      // 优先使用现代 Clipboard API
       if (navigator.clipboard && navigator.clipboard.writeText) {
         return navigator.clipboard.writeText(text);
       }
-      // 降级方案：创建临时 textarea
       return new Promise(function (resolve, reject) {
         var textarea = document.createElement('textarea');
         textarea.value = text;
@@ -319,7 +215,6 @@
     }
 
     document.getElementById('btnDownload').addEventListener('click', function () {
-      // 先复制口令，再跳转
       copyToClipboard(KOULING_TEXT)
         .then(function () {
           showToast('口令已复制，即将前往应用商店～');
